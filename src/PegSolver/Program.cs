@@ -8,32 +8,40 @@ public class Program
         static int[][] stateMap = [[]];
 
         static int[][] triMap = [[]];
-        //Generate a new trinagle from the given size.
-        public static void createTriangle()
+        static int[][] adjMap = [[]];
+    //Generate a new trinagle from the given size.
+    public static void createTriangle()
+    {
+        int[][] newTriMap = new int[tSize][];
+        //Generate the width of the graph.
+        int width = 2 * tSize + 1;
+        newTriMap[0] = new int[width];
+        //initialize the values to 0.
+        for (int i = 0; i < width; i++)
         {
-                int[][] newStateMap = new int[tSize][];
-                newStateMap[0] = new int[] { 0 };
-                int width = 2 * tSize + 1;
-                int[][] newTriMap = new int[tSize+1][];
-                // for (int i = 0; i < width; i++)
-                // {
-                //         newStateMap[0][i] = 0;
-                // }
-                newTriMap[1] = newStateMap[0];
-                // newStateMap[1][0] = 1;
-
-
-                for (int i = 1; i < tSize; i++)
-                {
-                        
-                        newStateMap[i] = new int[i + 1];
-                        for (int j = 0; j < newStateMap[i].Length; j++)
-                        {
-                                newStateMap[i][j] = 1;
-                        }
-                }
-                stateMap = newStateMap;
+            newTriMap[0][i] = 0;
         }
+        //initialize the first row.
+        newTriMap[0][tSize] = 1;
+        //for each row: Create a row of zeros, iterate from the left index to the right, changing each value as needed.
+        for (int i = 1; i < tSize; i++)
+        {
+            newTriMap[i] = new int[width];
+            for (int j = 0; j < width; j++)
+            {
+                newTriMap[i][j] = 0;
+            }
+            newTriMap[i][tSize - i] = 1;
+            for (int x = tSize - i; x <= tSize + i; x++)
+            {
+                if (newTriMap[i][x - 1] != 1)
+                {
+                    newTriMap[i][x] = 1;
+                }
+            }
+        }
+        triMap = newTriMap;
+    }
         static public void displayTriangle(int[][] tirangle)
         {
                 for (int i = 0; i < tirangle.Length; i++)
@@ -45,17 +53,21 @@ public class Program
                         Console.WriteLine();
                 }
         }
-        static public void mapTriangle(int[][] triangle)
+        static public void mapTriangle()
         {
-                for (int i = 0; i < triangle.Length; i++)
-                {
-                        for (int j = 0; j < triangle[i].Length; j++)
-                        {
-                                (int, int) curr = (i, j);
-                                
+            int[][] newTriMap = [[]];
+            for (int i = 0; i < triMap.Length; i++)
+            {
+            if ( )
+            {
 
-                         }
-                }
+             }
+                for (int j = 0; j < triMap[i].Length; j++)
+            {
+
+
+            }
+            }
         }
         static public Boolean checkSolution(int[][] triangle)
         {
@@ -83,8 +95,8 @@ public class Program
         public static void Main(string[] args)
         {
                 createTriangle();
-                displayTriangle(stateMap);
-                Console.WriteLine(checkSolution(stateMap));
+                displayTriangle(triMap);
+                Console.WriteLine(checkSolution(triMap));
                 if (move((2, 2), (1, 1)) == (0, 0))
                 {
                         Console.WriteLine("move from 2,2 to 1,1 is 0,0");
