@@ -1,0 +1,15 @@
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\bin\Debug\net9.0\PegSolver.exe
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\bin\Debug\net9.0\PegSolver.deps.json
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\bin\Debug\net9.0\PegSolver.runtimeconfig.json
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\bin\Debug\net9.0\PegSolver.dll
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\bin\Debug\net9.0\PegSolver.pdb
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\obj\Debug\net9.0\PegSolver.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\obj\Debug\net9.0\PegSolver.AssemblyInfoInputs.cache
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\obj\Debug\net9.0\PegSolver.AssemblyInfo.cs
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\obj\Debug\net9.0\PegSolver.csproj.CoreCompileInputs.cache
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\obj\Debug\net9.0\PegSolver.sourcelink.json
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\obj\Debug\net9.0\PegSolver.dll
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\obj\Debug\net9.0\refint\PegSolver.dll
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\obj\Debug\net9.0\PegSolver.pdb
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\obj\Debug\net9.0\PegSolver.genruntimeconfig.cache
+C:\Users\Zach\CSharpProjects\NewPegSolver\src\PegSolver\obj\Debug\net9.0\ref\PegSolver.dll
