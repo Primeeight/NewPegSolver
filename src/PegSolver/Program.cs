@@ -1,16 +1,16 @@
 ﻿using System;
 
-public class Program
+public partial class Program
 {
         //size of the triangle, default is 4.
-        static int tSize = 4;
+        public int tSize = 4;
         //state representation of the triangle, default is empty table.
-        static int[][] stateMap = [[]];
+        public int[][] stateMap = [[]];
 
-        static int[][] triMap = [[]];
-         static Dictionary<(int, int), (int, int)[]> adjList = new Dictionary<(int, int), (int,int)[]>();
+         public int[][] triMap = [[]];
+        public Dictionary<(int, int), (int, int)[]> adjList = new Dictionary<(int, int), (int,int)[]>();
         //Generate a new trinagle from the given size.
-        public static void createTriangle()
+        public  void createTriangle()
         {
                 int[][] newTriMap = new int[tSize][];
                 //Generate the width of the graph.
@@ -42,7 +42,7 @@ public class Program
                 }
                 triMap = newTriMap;
         }
-        static public void displayTriangle(int[][] tirangle)
+         public void displayTriangle(int[][] tirangle)
         {
                 for (int i = 0; i < tirangle.Length; i++)
                 {
@@ -53,7 +53,7 @@ public class Program
                         Console.WriteLine();
                 }
         }
-        static public void mapTriangle()
+         public void mapTriangle()
         {
                 
                 int width = 2 * tSize + 1;
@@ -79,7 +79,7 @@ public class Program
                         }
                 }
         }
-        static public Boolean checkSolution(int[][] triangle)
+         public Boolean checkSolution(int[][] triangle)
         {
                 int count = 0;
                 for (int i = 0; i < triangle.Length; i++)
@@ -96,25 +96,10 @@ public class Program
         //accepts two verticies
         //makes a move from the first verticie to the next space in the same direction as the second veritcie
         //assumes given veritcies are valid (for now).         
-        public static (int, int) move((int, int) v1, (int, int) v2)
+        public (int, int) move((int, int) v1, (int, int) v2)
         {
                 (int, int) direction = (v2.Item1 - v1.Item1, v2.Item2 - v1.Item2);
                 return (v2.Item1 + direction.Item1, v2.Item2 + direction.Item2);
 
-        }
-        public static void Main(string[] args)
-        {
-                createTriangle();
-                displayTriangle(triMap);
-                mapTriangle();
-                Console.WriteLine(checkSolution(triMap));
-                if (move((2, 2), (1, 1)) == (0, 0))
-                {
-                        Console.WriteLine("move from 2,2 to 1,1 is 0,0");
-                }
-                else
-                {
-                        Console.WriteLine("move failed");
-                }
         }
 }
