@@ -1,10 +1,10 @@
 public class ProgramStart
 {
-    public static void Main(string[] args)
-    {
-        Program program = new Program();
-        program.createTriangle();
-        
+        public static void Main(string[] args)
+        {
+                Program program = new Program();
+                program.createTriangle();
+
                 program.displayTriangle(program.triMap);
                 program.mapTriangle();
                 Console.WriteLine(program.checkSolution(program.triMap));
@@ -16,6 +16,13 @@ public class ProgramStart
                 {
                         Console.WriteLine("move failed");
                 }
+
+                //Dictionary testing
+                // Console.WriteLine("Dictionary testing");
+                // foreach (var tri in program.adjList.Keys)
+                // {
+                //         Console.WriteLine("" + tri);
+                // }
 
     }
  }
