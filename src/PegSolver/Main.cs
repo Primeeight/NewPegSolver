@@ -18,11 +18,22 @@ public class ProgramStart
                 }
 
                 //Dictionary testing
-                // Console.WriteLine("Dictionary testing");
-                // foreach (var tri in program.adjList.Keys)
-                // {
-                //         Console.WriteLine("" + tri);
-                // }
+                Console.WriteLine("Dictionary testing");
+                (int, int)[] keys = program.adjList.Keys.ToArray();
+                (int, int)[][] values = program.adjList.Values.ToArray();
+                for (int i = 0; i < keys.Length; i++)
+                {
+                        Console.Write("Keys" + keys[i]);
+                        Console.Write("Values");
+                        for (int j = 0; j < values[i].Length; j++)
+                        {
+                                if (values[i][j] != (0, 0))
+                                {
+                                        Console.Write(values[i][j]);
+                                }
+                        }
+                        Console.WriteLine("");
+                }
 
     }
  }

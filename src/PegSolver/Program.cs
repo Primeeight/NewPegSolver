@@ -71,8 +71,12 @@ public partial class Program
                         {
                                 if (triMap[i][j] == 1)
                                 {
-                                        blankArray.CopyTo(targetArray, 0);
-                                        adjList.Add((i, j), targetArray);
+                                        blankArray = new (int, int)[8];
+                                        for (int x = 0; x < blankArray.Length - 1; x++)
+                                        {
+                                                blankArray[x] = (0, 0);
+                                        }
+                                        adjList.Add((i, j), blankArray);
                                  }    
                         }
                 }
@@ -80,56 +84,70 @@ public partial class Program
         public void mapTriangle()
         {
                 initDictionary();
-                int width = 2 * tSize + 1;
-                // int[,] newTriMap = new int[tSize + 1, width];
                 //max of 8 adjacent elements
-                // (int, int)[] currElement = new (int, int)[8];
                 (int, int)[] keys = adjList.Keys.ToArray();
                 for (int i = 0; i < keys.Length; i++)
                 {
+                        
                         (int, int) curr = keys[i];
+                        //obtain the current key's value list.
                         (int, int)[] currArr = adjList[curr];
+                        //initialize an array to hold the next key's array.
                         (int, int)[] nextArr = new (int, int)[(int)currArr.Length];
+                        //search each surronding key next to the current key, starting with the left-diagonal.
                         (int, int) next = (curr.Item1 + 1, curr.Item2 - 1);
                         if (keys.Contains(next))
                         {
                                 nextArr = adjList[next];
-                                currArr[0] = (next);
+                                //left diagonal
+                                currArr[0] = next;
+                                //add the current key to the next key's corrosponding values.
+                                //top right diagonal 
                                 nextArr[1] = curr;
-                                adjList[curr] = currArr;
                                 adjList[next] = nextArr;
-                                Console.WriteLine("Curr and Next");
-                                Console.WriteLine(curr);
-                                Console.WriteLine(next);
 
                         }
-                        
-                 }
+                        next = (curr.Item1 + 1, curr.Item2);
+                        if (keys.Contains(next))
+                        {
+                                nextArr = adjList[next];
+                                //below
+                                currArr[2] = next;
+                                //top
+                                nextArr[3] = curr;
+                                adjList[next] = nextArr;
 
 
+                        }
+                        next = (curr.Item1 + 1, curr.Item2 + 1);
+                        if (keys.Contains(next))
+                        {
+                                nextArr = adjList[next];
+                                //right diagonal
+                                currArr[4] = next;
+                                //top left diagonal
+                                nextArr[5] = curr;
+                                adjList[next] = nextArr;
 
 
+                        }
+                        //offset is 2 due to triangle map requirements.
+                        next = (curr.Item1, curr.Item2 + 2);
+                        if (keys.Contains(next))
+                        {
+                                nextArr = adjList[next];
+                                //right
+                                currArr[6] = next;
+                                //left
+                                nextArr[7] = curr;
+                                adjList[next] = nextArr;
+                        }
+                        //set the values of the current key.
+                        adjList[curr] = currArr;
 
-
-                // for (int i = 1; i < triMap.Length; i++)
-                // {
-                //         for (int j = 0; j < triMap[i].Length; j++)
-                //         {
-                //                 if (triMap[i][j] == 1)
-                //                 {
-                //                         if (i < triMap.Length - 1)
-                //                         {
-                //                                 if (triMap[i + 1][j] == 1)
-                //                                 {
-                //                                         currElement[0] = (i + 1, j);
-                //                                 }
-                //                         }
-                //                         adjList.Add((i, j), currElement);
-                //                 }
-
-                //         }
-                // }
+                }
         }
+
          public Boolean checkSolution(int[][] triangle)
         {
                 int count = 0;
