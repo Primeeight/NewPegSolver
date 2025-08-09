@@ -74,7 +74,7 @@ public partial class Program
                                         blankArray = new (int, int)[8];
                                         for (int x = 0; x < blankArray.Length - 1; x++)
                                         {
-                                                blankArray[x] = (0, 0);
+                                                 blankArray[x] = (0, 0);
                                         }
                                         adjList.Add((i, j), blankArray);
                                  }    
@@ -95,54 +95,30 @@ public partial class Program
                         //initialize an array to hold the next key's array.
                         (int, int)[] nextArr = new (int, int)[(int)currArr.Length];
                         //search each surronding key next to the current key, starting with the left-diagonal.
-                        (int, int) next = (curr.Item1 + 1, curr.Item2 - 1);
-                        if (keys.Contains(next))
+                        // (int, int) next = (curr.Item1 + 1, curr.Item2 - 1);
+                        (int, int)[] adjacentSpots = new (int, int)[4];
+                        int arrIndex = -1;
+                        adjacentSpots[0] = (curr.Item1 + 1, curr.Item2 - 1); 
+                        adjacentSpots[1] = (curr.Item1 + 1, curr.Item2);
+                        adjacentSpots[2] = (curr.Item1 + 1, curr.Item2 + 1);
+                        adjacentSpots[3] = (curr.Item1, curr.Item2 +2);
+
+                        foreach ((int, int) next in adjacentSpots)
                         {
-                                nextArr = adjList[next];
-                                //left diagonal
-                                currArr[0] = next;
-                                //add the current key to the next key's corrosponding values.
-                                //top right diagonal 
-                                nextArr[1] = curr;
-                                adjList[next] = nextArr;
+                                if (keys.Contains(next))
+                                {
+                                        nextArr = adjList[next];
+                                        //left diagonal
+                                        arrIndex++;
+                                        currArr[arrIndex] = next;
+                                        //add the current key to the next key's corrosponding values.
+                                        //top right diagonal
+                                        arrIndex++; 
+                                        nextArr[arrIndex] = curr;
+                                        adjList[next] = nextArr;
 
+                                }
                         }
-                        next = (curr.Item1 + 1, curr.Item2);
-                        if (keys.Contains(next))
-                        {
-                                nextArr = adjList[next];
-                                //below
-                                currArr[2] = next;
-                                //top
-                                nextArr[3] = curr;
-                                adjList[next] = nextArr;
-
-
-                        }
-                        next = (curr.Item1 + 1, curr.Item2 + 1);
-                        if (keys.Contains(next))
-                        {
-                                nextArr = adjList[next];
-                                //right diagonal
-                                currArr[4] = next;
-                                //top left diagonal
-                                nextArr[5] = curr;
-                                adjList[next] = nextArr;
-
-
-                        }
-                        //offset is 2 due to triangle map requirements.
-                        next = (curr.Item1, curr.Item2 + 2);
-                        if (keys.Contains(next))
-                        {
-                                nextArr = adjList[next];
-                                //right
-                                currArr[6] = next;
-                                //left
-                                nextArr[7] = curr;
-                                adjList[next] = nextArr;
-                        }
-                        //set the values of the current key.
                         adjList[curr] = currArr;
 
                 }
