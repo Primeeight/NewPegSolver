@@ -3,6 +3,7 @@ public class ProgramStart
         public static void Main(string[] args)
         {
                 Program program = new Program();
+                Node node= new Node(true);
                 //Triangel Creation testing
                 Console.WriteLine("Testing Program Creation: " + TestTriangleCreation(program));
                 //Solution testing
@@ -11,6 +12,9 @@ public class ProgramStart
                 Console.WriteLine("Testing getting the next point: " + TestGetThirdPoint(program));
                 //Dictionary testing
                 Console.WriteLine("Testing Dictionary Creation: " + TestDictionaryCreation(program));
+
+                //Node Creation testing
+                Console.WriteLine("Testing Node Creation: " + TestNodeCreation(node));
 
         }
         static bool TestTriangleCreation(Program program)
@@ -49,5 +53,17 @@ public class ProgramStart
                         return true;
                 }
                 return false;
-         }
+        }
+        static bool TestNodeCreation(Node node)
+        {
+                int[][] newState = [[0, 0, 0]];
+                node.setState(newState);
+                Node[] nodes = {new Node(false)};
+                if (node.getState() == newState && node.getChildern() == nodes)
+                {
+                        return true;
+                }
+
+                return false;
+        }
  }
