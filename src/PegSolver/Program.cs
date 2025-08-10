@@ -154,6 +154,72 @@ public partial class Program
                 foreach (var pos in positions)
                 {
                         state[pos.Item1][pos.Item2] = ~state[pos.Item1][pos.Item2];
-                 }
-         }
+                }
+        }
+
+
+        public void init()
+        {
+                //create path queue
+                // create bfs Queue
+                //call bfs
+                //call backtrace
+
+        }
+        //Recursive method to search for goal state
+        public void bfs()
+        {
+                //base case
+                //if !checksolution(bfsqueue[0])
+                {
+                        //node currNode = bfsQueuee.pop();
+                        // currNode.childern = currNode.getChildern
+                        //if currNode.childern:
+                        //for i in currNode.childern:
+                        //i.parent = currNode.child
+                        //bfsQueue.append(i)
+                        //next call
+                        //bfsHelper()
+
+                }
+        }
+        public Node[] getChildern(Node currNode)
+        {
+                //may need to be array lists
+                //Node[] childern = new Node[](i)
+
+                //may make this into a class
+                //(tuple, tuple, tuple)[] availMoves = new (tuple, tuple, tuple)[](i)
+
+                //for i in currNode.state
+                {
+                        //for j in currNode.state[i]
+                        {
+                                //if currnode.state[i][j] == 0
+                                {
+                                        //foreach (pos in adjList(i, j))
+                                        {
+                                                //if currNode.state[pos.Item1][pos.Item2] == 1 && 
+                                                // currNode.state[getThirdPoint((i, j), pos).Item1][getThirdPoint((i, j), pos).Item2] == 1
+                                                {
+                                                        //availMoves.add((i, j), pos, getThirdPoint((i, j), pos));     
+                                                }
+
+                                        }
+                                }
+                        }
+                        //end get moves.
+                        //foreach(availMove in availmoves)
+                        {
+                                //Node node = new Node();
+                                // node.setState =  move(node.state, availMove);
+                                //childern.append(node)
+                        }
+                        //end add childern
+
+                }
+                return new Node[1];
+        }
+
+
 }
