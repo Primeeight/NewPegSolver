@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Globalization;
+using System.Runtime.InteropServices;
 
 public partial class Program
 {
@@ -9,12 +10,12 @@ public partial class Program
         //state representation of the triangle, default is empty table.
         public int[][] stateMap = [[]];
 
-         public int[][] triMap = [[]];
-        public Dictionary<(int, int), (int, int)[]> adjList = new Dictionary<(int, int), (int,int)[]>();
+        public int[][] triMap = [[]];
+        public Dictionary<(int, int), (int, int)[]> adjList = new Dictionary<(int, int), (int, int)[]>();
         //Generate a new trinagle from the given size.
-        public  void createTriangle()
+        public void createTriangle()
         {
-                int[][] newTriMap = new int[tSize+1][];
+                int[][] newTriMap = new int[tSize + 1][];
                 //Generate the width of the graph.
                 int width = 2 * tSize + 1;
                 newTriMap[0] = new int[width];
@@ -35,7 +36,7 @@ public partial class Program
                         {
                                 newTriMap[i][j] = 0;
                         }
-                        newTriMap[i][tSize - i +1] = 1;
+                        newTriMap[i][tSize - i + 1] = 1;
                         for (int x = tSize - i + 1; x <= tSize + i; x++)
                         {
                                 if (newTriMap[i][x - 1] != 1)
@@ -46,7 +47,7 @@ public partial class Program
                 }
                 triMap = newTriMap;
         }
-         public void displayTriangle(int[][] tirangle)
+        public void displayTriangle(int[][] tirangle)
         {
                 for (int i = 0; i < tirangle.Length; i++)
                 {
@@ -74,13 +75,13 @@ public partial class Program
                                         blankArray = new (int, int)[8];
                                         for (int x = 0; x < blankArray.Length - 1; x++)
                                         {
-                                                 blankArray[x] = (0, 0);
+                                                blankArray[x] = (0, 0);
                                         }
                                         adjList.Add((i, j), blankArray);
-                                 }    
+                                }
                         }
                 }
-         }
+        }
         public void mapTriangle()
         {
                 initDictionary();
@@ -88,7 +89,7 @@ public partial class Program
                 (int, int)[] keys = adjList.Keys.ToArray();
                 for (int i = 0; i < keys.Length; i++)
                 {
-                        
+
                         (int, int) curr = keys[i];
                         //obtain the current key's value list.
                         (int, int)[] currArr = adjList[curr];
@@ -98,10 +99,10 @@ public partial class Program
                         // (int, int) next = (curr.Item1 + 1, curr.Item2 - 1);
                         (int, int)[] adjacentSpots = new (int, int)[4];
                         int arrIndex = -1;
-                        adjacentSpots[0] = (curr.Item1 + 1, curr.Item2 - 1); 
+                        adjacentSpots[0] = (curr.Item1 + 1, curr.Item2 - 1);
                         adjacentSpots[1] = (curr.Item1 + 1, curr.Item2);
                         adjacentSpots[2] = (curr.Item1 + 1, curr.Item2 + 1);
-                        adjacentSpots[3] = (curr.Item1, curr.Item2 +2);
+                        adjacentSpots[3] = (curr.Item1, curr.Item2 + 2);
 
                         foreach ((int, int) next in adjacentSpots)
                         {
@@ -113,7 +114,7 @@ public partial class Program
                                         currArr[arrIndex] = next;
                                         //add the current key to the next key's corrosponding values.
                                         //top right diagonal
-                                        arrIndex++; 
+                                        arrIndex++;
                                         nextArr[arrIndex] = curr;
                                         adjList[next] = nextArr;
 
@@ -124,7 +125,7 @@ public partial class Program
                 }
         }
 
-         public Boolean checkSolution(int[][] triangle)
+        public Boolean checkSolution(int[][] triangle)
         {
                 int count = 0;
                 for (int i = 0; i < triangle.Length; i++)
@@ -146,4 +147,13 @@ public partial class Program
                 (int, int) direction = (v2.Item1 - v1.Item1, v2.Item2 - v1.Item2);
                 return (v2.Item1 + direction.Item1, v2.Item2 + direction.Item2);
         }
+        public void move(int[][] state, (int, int) pos1, (int, int) pos2)
+        {
+                (int, int) pos3 = getThirdPoint(pos1, pos2);
+                (int, int)[] positions = { pos1, pos2, pos3 };
+                foreach (var pos in positions)
+                {
+                        state[pos.Item1][pos.Item2] = ~state[pos.Item1][pos.Item2];
+                 }
+         }
 }
