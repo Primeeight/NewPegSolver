@@ -141,10 +141,9 @@ public partial class Program
         //accepts two verticies
         //makes a move from the first verticie to the next space in the same direction as the second veritcie
         //assumes given veritcies are valid (for now).         
-        public (int, int) move((int, int) v1, (int, int) v2)
+        public (int, int) getThirdPoint((int, int) v1, (int, int) v2)
         {
                 (int, int) direction = (v2.Item1 - v1.Item1, v2.Item2 - v1.Item2);
                 return (v2.Item1 + direction.Item1, v2.Item2 + direction.Item2);
-
         }
 }
