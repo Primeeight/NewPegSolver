@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PegSolver")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+18cd0d5e1ac030f2e89610c4840d02fea1e23a4e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b1b7a800a548ece6030eeea71af5aaeec45a766")]
 [assembly: System.Reflection.AssemblyProductAttribute("PegSolver")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PegSolver")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
