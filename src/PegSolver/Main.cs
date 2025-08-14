@@ -3,7 +3,7 @@ public class ProgramStart
         public static void Main(string[] args)
         {
                 Program program = new Program();
-                Node node= new Node(true);
+                Node node = new Node(true);
                 //Triangel Creation testing
                 Console.WriteLine("Testing Program Creation: " + TestTriangleCreation(program));
                 //Solution testing
@@ -58,12 +58,25 @@ public class ProgramStart
         {
                 int[][] newState = [[0, 0, 0]];
                 node.setState(newState);
-                Node[] nodes = {new Node(false)};
+                Node[] nodes = { new Node(false) };
                 if (node.getState() == newState && node.getChildern() == nodes)
                 {
                         return true;
                 }
 
+                return false;
+        }
+        static bool TestMoveCreation(Program program)
+        {
+                Move desiredMove = new Move(((4, 1), (3,2), (2,3)));
+                int[][] currState = program.stateMap;
+                Node node = new Node(false);
+                node.setState(currState);
+                Node[] childern = program.getChildern(node);
+                if (childern.Contains(node))
+                { 
+                        return true;
+                 }
                 return false;
         }
  }

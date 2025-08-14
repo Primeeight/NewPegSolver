@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.InteropServices;
@@ -185,30 +186,12 @@ public partial class Program
         }
         public Node[] getChildern(Node currNode)
         {
-                //may need to be array lists
+                //ArrayList of Childern
                 //Node[] childern = new Node[](i)
+                ArrayList childern = new ArrayList();
+                
 
-                //may make this into a class
-                //(tuple, tuple, tuple)[] availMoves = new (tuple, tuple, tuple)[](i)
-
-                //for i in currNode.state
-                {
-                        //for j in currNode.state[i]
-                        {
-                                //if currnode.state[i][j] == 0
-                                {
-                                        //foreach (pos in adjList(i, j))
-                                        {
-                                                //if currNode.state[pos.Item1][pos.Item2] == 1 && 
-                                                // currNode.state[getThirdPoint((i, j), pos).Item1][getThirdPoint((i, j), pos).Item2] == 1
-                                                {
-                                                        //availMoves.add((i, j), pos, getThirdPoint((i, j), pos));     
-                                                }
-
-                                        }
-                                }
-                        }
-                        //end get moves.
+                //end get moves.
                         //foreach(availMove in availmoves)
                         {
                                 //Node node = new Node();
@@ -216,9 +199,46 @@ public partial class Program
                                 //childern.append(node)
                         }
                         //end add childern
+                return new Node[1];
+        }
+        
+        //move alot of functionality from git childern to GetMoves.
+        public Move[] GetMoves(Node currNode)
+        {
+                var currState = currNode.getState();
+                //may make this into a class
+                //(tuple, tuple, tuple)[] availMoves = new (tuple, tuple, tuple)[](i)
+                Move[] availMoves = new Move[3];
+
+                //for i in currNode.state
+                for (int i = 0; i < currState.Length; i++)
+                {
+                        //for j in currNode.state[i]
+                        for (int j = 0; j < currState[j].Length; j++)
+                        {
+                                //if currnode.state[i][j] == 0
+                                if (currState[i][j] == 0)
+                                {
+                                        //foreach (pos in adjList(i, j))
+                                        foreach ((int, int) pos in adjList[(i, j)])
+                                        {
+                                                //if currNode.state[pos.Item1][pos.Item2] == 1 && 
+                                                // currNode.state[getThirdPoint((i, j), pos).Item1][getThirdPoint((i, j), pos).Item2] == 1
+                                                var thirdPos = getThirdPoint((i, j), pos);
+                                                if (currState[pos.Item1][pos.Item2] == 1 && currState[thirdPos.Item1][thirdPos.Item2] == 1)
+                                                {
+                                                        //availMoves.add((i, j), pos, getThirdPoint((i, j), pos));     
+                                                }
+
+                                        }
+                                }
+                        }
+                        
 
                 }
-                return new Node[1];
+
+
+                return new Move[3];
         }
 
 
