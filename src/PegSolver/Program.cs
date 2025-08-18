@@ -83,9 +83,16 @@ public partial class Program
                         }
                 }
         }
+        public void initState()
+        {
+                stateMap = new int[triMap.Length][];
+                Array.Copy(triMap, stateMap, triMap.Length);
+                stateMap[2][3] = 0;
+         }
         public void mapTriangle()
         {
                 initDictionary();
+                initState();
                 //max of 8 adjacent elements
                 (int, int)[] keys = adjList.Keys.ToArray();
                 for (int i = 0; i < keys.Length; i++)
@@ -188,18 +195,24 @@ public partial class Program
         {
                 //ArrayList of Childern
                 //Node[] childern = new Node[](i)
-                ArrayList childern = new ArrayList();
-                
+                Move[]availMoves = GetMoves(currNode);
+                Node[] childern = new Node[availMoves.Length];
 
                 //end get moves.
-                        //foreach(availMove in availmoves)
-                        {
-                                //Node node = new Node();
-                                // node.setState =  move(node.state, availMove);
-                                //childern.append(node)
-                        }
-                        //end add childern
-                return new Node[1];
+                //foreach(availMove in availmoves)
+                for (int i = 0; i < availMoves.Length; i++)
+                {
+                        //Node node = new Node();
+                        childern[i] = new Node();
+                        //Verifiy this does not share a multable array.
+                        childern[i].setState(currNode.getState());
+                        // node.setState =  move(node.state, availMove);
+                        move(childern[i].getState(), availMoves[i].GetItem(1), availMoves[i].GetItem(2));
+                                
+                        //childern.append(node)
+                }
+                //end add childern
+                return childern;
         }
         
         //move alot of functionality from git childern to GetMoves.
@@ -208,18 +221,21 @@ public partial class Program
                 var currState = currNode.getState();
                 //may make this into a class
                 //(tuple, tuple, tuple)[] availMoves = new (tuple, tuple, tuple)[](i)
-                Move[] availMoves = new Move[3];
+                // Move[] availMoves = new Move[3];
+                List <Move> availMoves = new List<Move>();
+                (int, int)[] keyValues = adjList.Keys.ToArray();
 
                 //for i in currNode.state
                 for (int i = 0; i < currState.Length; i++)
                 {
                         //for j in currNode.state[i]
-                        for (int j = 0; j < currState[j].Length; j++)
+                        for (int j = 0; j < currState[i].Length; j++)
                         {
                                 //if currnode.state[i][j] == 0
-                                if (currState[i][j] == 0)
+                                if (currState[i][j] == 0 && keyValues.Contains((i, j)))
                                 {
                                         //foreach (pos in adjList(i, j))
+                                        //make sure this reflects correct adjlist
                                         foreach ((int, int) pos in adjList[(i, j)])
                                         {
                                                 //if currNode.state[pos.Item1][pos.Item2] == 1 && 
@@ -227,18 +243,20 @@ public partial class Program
                                                 var thirdPos = getThirdPoint((i, j), pos);
                                                 if (currState[pos.Item1][pos.Item2] == 1 && currState[thirdPos.Item1][thirdPos.Item2] == 1)
                                                 {
-                                                        //availMoves.add((i, j), pos, getThirdPoint((i, j), pos));     
+                                                        //availMoves.add((i, j), pos, getThirdPoint((i, j), pos));
+                                                        availMoves.Add(new Move((getThirdPoint((i, j), pos), pos, (i, j))));
+
                                                 }
 
                                         }
                                 }
                         }
-                        
+
 
                 }
 
 
-                return new Move[3];
+                return availMoves.ToArray();
         }
 
 

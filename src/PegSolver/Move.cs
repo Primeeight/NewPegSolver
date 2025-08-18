@@ -22,5 +22,13 @@ public class Move(((int, int), (int, int), (int, int)) representation)
     public void setRep(((int, int), (int, int), (int, int)) newRep)
     {
         rep = newRep;
-     }
+    }
+    public override bool Equals(object other)
+    {
+        if (other == null)
+        return false;
+        
+        Move otherMove = other as Move;
+        return rep.Item1 == otherMove.GetItem(1) && rep.Item2 == otherMove.GetItem(2) && rep.Item3 == otherMove.GetItem(3);
+    }
 }

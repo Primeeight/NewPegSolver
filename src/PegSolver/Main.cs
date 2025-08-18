@@ -12,21 +12,17 @@ public class ProgramStart
                 Console.WriteLine("Testing getting the next point: " + TestGetThirdPoint(program));
                 //Dictionary testing
                 Console.WriteLine("Testing Dictionary Creation: " + TestDictionaryCreation(program));
-
                 //Node Creation testing
                 Console.WriteLine("Testing Node Creation: " + TestNodeCreation(node));
+                //Move Creation testing
+                Console.WriteLine("Move Creation testing: " + TestMoveCreation(program));
 
         }
         static bool TestTriangleCreation(Program program)
         {
                 program.createTriangle();
                 int[][] triangle = program.triMap;
-                if (triangle[1] == new int[] { 0, 0, 0, 0, 1, 0, 0, 0, 0 } && triangle[2] == new int[] { 0, 0, 0, 1, 0, 1, 0, 0, 0 })
-                {
-                        return true;
-                }
-                return false;
-
+                return triangle[1].SequenceEqual(new int[] { 0, 0, 0, 0, 1, 0, 0, 0, 0 }) && triangle[2].SequenceEqual(new int[] { 0, 0, 0, 1, 0, 1, 0, 0, 0});
         }
 
         static bool TestSolutionTesting(Program program)
@@ -59,6 +55,7 @@ public class ProgramStart
                 int[][] newState = [[0, 0, 0]];
                 node.setState(newState);
                 Node[] nodes = { new Node(false) };
+                node.setChildern(nodes);
                 if (node.getState() == newState && node.getChildern() == nodes)
                 {
                         return true;
@@ -69,14 +66,17 @@ public class ProgramStart
         static bool TestMoveCreation(Program program)
         {
                 Move desiredMove = new Move(((4, 1), (3,2), (2,3)));
-                int[][] currState = program.stateMap;
-                Node node = new Node(false);
+                int[][] currState = program.triMap;
+                Node node = new Node();
                 node.setState(currState);
-                Node[] childern = program.getChildern(node);
-                if (childern.Contains(node))
-                { 
-                        return true;
-                 }
+                Move[] moves = program.GetMoves(node);
+                foreach (var move in moves)
+                {
+                        if (move.Equals(desiredMove))
+                        {
+                                return true;
+                        }
+                }
                 return false;
         }
  }
