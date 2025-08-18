@@ -87,6 +87,13 @@ public partial class Program
         {
                 stateMap = new int[triMap.Length][];
                 Array.Copy(triMap, stateMap, triMap.Length);
+                for (int i = 0; i < stateMap.Length; i++)
+                {
+                        for (int j = 0; j < stateMap[i].Length ; j++)
+                        {
+                                stateMap[i][j] = stateMap[i][j] == 0? -1 : 1;
+                         }
+                 }
                 stateMap[2][3] = 0;
          }
         public void mapTriangle()
@@ -232,7 +239,7 @@ public partial class Program
                         for (int j = 0; j < currState[i].Length; j++)
                         {
                                 //if currnode.state[i][j] == 0
-                                if (currState[i][j] == 0 && keyValues.Contains((i, j)))
+                                if (currState[i][j] == 0)
                                 {
                                         //foreach (pos in adjList(i, j))
                                         //make sure this reflects correct adjlist
