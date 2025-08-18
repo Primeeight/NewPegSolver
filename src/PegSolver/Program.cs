@@ -14,6 +14,12 @@ public partial class Program
         public int[][] triMap = [[]];
         public Dictionary<(int, int), (int, int)[]> adjList = new Dictionary<(int, int), (int, int)[]>();
         //Generate a new trinagle from the given size.
+
+        //create path queue
+                public List<Node> path = new List<Node>();
+                // create bfs Queue
+                Queue<Node> bfsQueue = new Queue<Node>();
+
         public void createTriangle()
         {
                 int[][] newTriMap = new int[tSize + 1][];
@@ -175,26 +181,68 @@ public partial class Program
 
         public void init()
         {
-                //create path queue
-                // create bfs Queue
                 //call bfs
+                createTriangle();
+                Node startNode = new Node();
+                startNode.setState(stateMap);
+                bfsQueue.Enqueue(startNode);
+                bfs();
                 //call backtrace
+                backTrace(bfsQueue.Peek());
 
         }
-        //Recursive method to search for goal state
-        public void bfs()
+
+        public void backTrace(Node node)
+        {
+                backTraceHelper(node);
+        }
+
+        public void backTraceHelper(Node currNode)
+        {
+                if (currNode != null)
+                {
+                        if (currNode.getParent() == null)
+                        {
+                                path.Add(currNode);
+                                return;
+                        }
+                        path.Add(currNode);
+                         backTraceHelper(currNode.getParent());
+                 }
+        }
+
+    //Recursive method to search for goal state
+    public void bfs()
         {
                 //base case
                 //if !checksolution(bfsqueue[0])
+                if (!checkSolution(bfsQueue.Peek().getState()))
+
                 {
+                        //recursive case
+
                         //node currNode = bfsQueuee.pop();
+                        Node currNode = bfsQueue.Dequeue();
+                        currNode.setChildern(currNode.getChildern());
                         // currNode.childern = currNode.getChildern
                         //if currNode.childern:
-                        //for i in currNode.childern:
-                        //i.parent = currNode.child
-                        //bfsQueue.append(i)
-                        //next call
-                        //bfsHelper()
+                        if (currNode.getChildern() != null)
+                        {
+                                //for i in currNode.childern:
+                                foreach (var child in currNode.getChildern())
+                                {
+                                        //i.parent = currNode
+                                        child.setParent(currNode);
+                                        //bfsQueue.append(i)
+                                        bfsQueue.Enqueue(child);
+
+                                }
+                                //next call
+                                //bfsHelper() 
+                                bfs();
+                         }
+                        
+                        
 
                 }
         }
@@ -211,7 +259,7 @@ public partial class Program
                 {
                         //Node node = new Node();
                         childern[i] = new Node();
-                        //Verifiy this does not share a multable array.
+                        //Verifiy this does not share a mutable array.
                         childern[i].setState(currNode.getState());
                         // node.setState =  move(node.state, availMove);
                         move(childern[i].getState(), availMoves[i].GetItem(1), availMoves[i].GetItem(2));
@@ -222,7 +270,7 @@ public partial class Program
                 return childern;
         }
         
-        //move alot of functionality from git childern to GetMoves.
+        //move alot of functionality from getChildern to getMoves.
         public Move[] GetMoves(Node currNode)
         {
                 var currState = currNode.getState();
