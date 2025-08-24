@@ -3,11 +3,13 @@ public class ProgramStart
         public static void Main(string[] args)
         {
                 Program program = new Program();
-                // Node node = new Node(true);
+                program.createTriangle();
+                program.mapTriangle();
+                Node node = new Node(true);
                 // //Triangel Creation testing
                 // Console.WriteLine("Testing Program Creation: " + TestTriangleCreation(program));
                 // //Solution testing
-                // Console.WriteLine("Testing checking solution " + TestSolutionTesting(program));
+                Console.WriteLine("Testing checking solution " + TestSolutionTesting(program));
                 // //Getting the next point testing
                 // Console.WriteLine("Testing getting the next point: " + TestGetThirdPoint(program));
                 // //Dictionary testing
@@ -23,15 +25,13 @@ public class ProgramStart
         }
         static bool TestTriangleCreation(Program program)
         {
-                program.createTriangle();
                 int[][] triangle = program.triMap;
                 return triangle[1].SequenceEqual(new int[] { 0, 0, 0, 0, 1, 0, 0, 0, 0 }) && triangle[2].SequenceEqual(new int[] { 0, 0, 0, 1, 0, 1, 0, 0, 0 });
         }
 
         static bool TestSolutionTesting(Program program)
         {
-                program.mapTriangle();
-                return program.checkSolution(program.triMap) == false;
+                return program.checkSolution(program.stateMap) == false;
         }
 
         static bool TestDictionaryCreation(Program program)
