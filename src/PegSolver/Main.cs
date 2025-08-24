@@ -18,6 +18,7 @@ public class ProgramStart
                 // Console.WriteLine("Move Creation testing: " + TestMoveCreation(program));
                 //BFS testing
                 Console.WriteLine("BFS testing " + TestBfs(program));
+                
 
         }
         static bool TestTriangleCreation(Program program)
@@ -84,6 +85,10 @@ public class ProgramStart
         static bool TestBfs(Program program)
         {
                 program.init();
-                return program.path != null ? true: false;
+                // foreach (var i in program.path)
+                // {
+                //         Console.WriteLine(i);
+                //  }
+                return program.path.Count >= 9 ? true : false;
         }
  }

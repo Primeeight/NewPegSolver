@@ -153,9 +153,12 @@ public partial class Program
                 {
                         for (int j = 0; j < triangle[i].Length; j++)
                         {
-                                count += triangle[i][j];
-                                if (count > 1)
-                                        return false;
+                                if (triangle[i][j] != -1)
+                                {
+                                        count += triangle[i][j];
+                                        if (count > 1)
+                                                return false;
+                                }
                         }
                 }
                 return true;
@@ -183,6 +186,7 @@ public partial class Program
         {
                 //call bfs
                 createTriangle();
+                mapTriangle();
                 Node startNode = new Node();
                 startNode.setState(stateMap);
                 bfsQueue.Enqueue(startNode);
@@ -223,7 +227,7 @@ public partial class Program
 
                         //node currNode = bfsQueuee.pop();
                         Node currNode = bfsQueue.Dequeue();
-                        currNode.setChildern(currNode.getChildern());
+                        currNode.setChildern(getChildern(currNode));
                         // currNode.childern = currNode.getChildern
                         //if currNode.childern:
                         if (currNode.getChildern() != null)
