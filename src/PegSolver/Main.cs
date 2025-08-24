@@ -6,6 +6,7 @@ public class ProgramStart
                 program.createTriangle();
                 program.mapTriangle();
                 Node node = new Node(true);
+                Program bfsProgram = new Program();
                 // //Triangel Creation testing
                 // Console.WriteLine("Testing Program Creation: " + TestTriangleCreation(program));
                 // //Solution testing
@@ -19,8 +20,8 @@ public class ProgramStart
                 // //Move Creation testing
                 // Console.WriteLine("Move Creation testing: " + TestMoveCreation(program));
                 //BFS testing
-                Console.WriteLine("BFS testing " + TestBfs(program));
-                
+                Console.WriteLine("BFS testing " + TestBfs(bfsProgram));
+
 
         }
         static bool TestTriangleCreation(Program program)
@@ -69,7 +70,7 @@ public class ProgramStart
         static bool TestMoveCreation(Program program)
         {
                 Move desiredMove = new Move(((4, 1), (3, 2), (2, 3)));
-                int[][] currState = program.triMap;
+                int[][] currState = program.stateMap;
                 Node node = new Node();
                 node.setState(currState);
                 Move[] moves = program.GetMoves(node);
@@ -82,6 +83,14 @@ public class ProgramStart
                 }
                 return false;
         }
+        static bool TestChildernGeneration(Program program)
+        {
+                int[][] currState = program.stateMap;
+                Node node = new Node();
+                node.setState(currState);
+                return false;
+        }
+
         static bool TestBfs(Program program)
         {
                 program.init();
@@ -91,4 +100,5 @@ public class ProgramStart
                 //  }
                 return program.path.Count >= 9 ? true : false;
         }
+        
  }
