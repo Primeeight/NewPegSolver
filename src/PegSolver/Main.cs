@@ -5,7 +5,7 @@ public class ProgramStart
                 Program program = new Program();
                 program.createTriangle();
                 program.mapTriangle();
-                Node node = new Node(true);
+                Node node = new Node();
                 Program bfsProgram = new Program();
                 // //Triangel Creation testing
                 // Console.WriteLine("Testing Program Creation: " + TestTriangleCreation(program));
@@ -62,7 +62,7 @@ public class ProgramStart
         {
                 int[][] newState = [[0, 0, 0]];
                 node.setState(newState);
-                Node[] nodes = { new Node(false) };
+                Node[] nodes = { new Node() };
                 node.setChildern(nodes);
                 if (node.getState() == newState && node.getChildern() == nodes)
                 {

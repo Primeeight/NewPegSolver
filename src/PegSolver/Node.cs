@@ -1,17 +1,17 @@
 //Node class
 using Microsoft.VisualBasic;
 
-public class Node(Boolean visited = false)
+public class Node()
 {
     //upon initialization of node, the set state method should be used to perform the move. 
     // int[,] state
     int[][]? state;
     //node parent
-    Node parent;
+    Node? parent;
     //node[] childern
     Node[]? childern;
     //public Node(Boolean visited = false, int[,] state);
-    Move move;
+    Move? move;
 
     //Method set state
     public void setState(int[][] newState)
@@ -20,10 +20,14 @@ public class Node(Boolean visited = false)
     }
     public int[][] getState()
     {
-        return state;
+
+        return state == null? new int[0][]: state;
     }
     public int[][] getStateDP()
     {
+        if (state == null)
+        return new int[0][];
+
         int[][] target = new int[state.Length][];
         for (int i = 0; i < state.Length; i++)
         {
@@ -38,11 +42,11 @@ public class Node(Boolean visited = false)
     }
     public Node[] getChildern()
     {
-        return childern;
+        return childern == null? new Node[0]: childern;
     }
     public Move getMove()
     {
-        return move;
+        return move == null? new Move(((-1, -1), (-1, -1), (-1, -1))) : move ;
      }
     public void setMove(Move move)
     {
