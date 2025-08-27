@@ -19,6 +19,7 @@ public partial class Program
                 public List<Node> path = new List<Node>();
                 // create bfs Queue
                 Queue<Node> bfsQueue = new Queue<Node>();
+                public List<Move> movePath = new List<Move>();
 
         public void createTriangle()
         {
@@ -177,7 +178,7 @@ public partial class Program
                 (int, int)[] positions = { pos1, pos2, pos3 };
                 foreach (var pos in positions)
                 {
-                        state[pos.Item1][pos.Item2] = ~state[pos.Item1][pos.Item2];
+                        state[pos.Item1][pos.Item2] =1-state[pos.Item1][pos.Item2];
                 }
         }
 
@@ -211,7 +212,9 @@ public partial class Program
                                 return;
                         }
                         path.Add(currNode);
-                         backTraceHelper(currNode.getParent());
+                        movePath.Add(currNode.getMove());
+                        backTraceHelper(currNode.getParent());
+                         
                  }
         }
 
@@ -264,11 +267,10 @@ public partial class Program
                         //Node node = new Node();
                         childern[i] = new Node();
                         //Verifiy this does not share a mutable array.
-                        childern[i].setState(currNode.getState());
+                        childern[i].setState(currNode.getStateDP());
+                        childern[i].setMove(availMoves[i]);
                         // node.setState =  move(node.state, availMove);
                         move(childern[i].getState(), availMoves[i].GetItem(1), availMoves[i].GetItem(2));
-                                
-                        //childern.append(node)
                 }
                 //end add childern
                 return childern;
@@ -300,11 +302,14 @@ public partial class Program
                                                 //if currNode.state[pos.Item1][pos.Item2] == 1 && 
                                                 // currNode.state[getThirdPoint((i, j), pos).Item1][getThirdPoint((i, j), pos).Item2] == 1
                                                 var thirdPos = getThirdPoint((i, j), pos);
-                                                if (currState[pos.Item1][pos.Item2] == 1 && currState[thirdPos.Item1][thirdPos.Item2] == 1)
+                                                if (adjList.ContainsKey(thirdPos))
                                                 {
-                                                        //availMoves.add((i, j), pos, getThirdPoint((i, j), pos));
-                                                        availMoves.Add(new Move((getThirdPoint((i, j), pos), pos, (i, j))));
+                                                        if (currState[pos.Item1][pos.Item2] == 1 && currState[thirdPos.Item1][thirdPos.Item2] == 1)
+                                                        {
+                                                                //availMoves.add((i, j), pos, getThirdPoint((i, j), pos));
+                                                                availMoves.Add(new Move((getThirdPoint((i, j), pos), pos, (i, j))));
 
+                                                        }
                                                 }
 
                                         }

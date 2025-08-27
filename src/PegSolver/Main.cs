@@ -10,17 +10,21 @@ public class ProgramStart
                 // //Triangel Creation testing
                 // Console.WriteLine("Testing Program Creation: " + TestTriangleCreation(program));
                 // //Solution testing
-                Console.WriteLine("Testing checking solution " + TestSolutionTesting(program));
+                // Console.WriteLine("Testing checking solution " + TestSolutionTesting(program));
                 // //Getting the next point testing
                 // Console.WriteLine("Testing getting the next point: " + TestGetThirdPoint(program));
                 // //Dictionary testing
                 // Console.WriteLine("Testing Dictionary Creation: " + TestDictionaryCreation(program));
                 // //Node Creation testing
                 // Console.WriteLine("Testing Node Creation: " + TestNodeCreation(node));
-                // //Move Creation testing
-                // Console.WriteLine("Move Creation testing: " + TestMoveCreation(program));
-                //BFS testing
+                // Testing move performance
+                // Console.WriteLine("Testing move performance " + TestMove(program));
+                // BFS testing
                 Console.WriteLine("BFS testing " + TestBfs(bfsProgram));
+                program = new Program();
+                program.createTriangle();
+                program.mapTriangle();
+                // Console.WriteLine("Testing childern generation " + TestChildernGeneration(program));    
 
 
         }
@@ -67,19 +71,19 @@ public class ProgramStart
 
                 return false;
         }
-        static bool TestMoveCreation(Program program)
+        static bool TestMove(Program program)
         {
                 Move desiredMove = new Move(((4, 1), (3, 2), (2, 3)));
                 int[][] currState = program.stateMap;
                 Node node = new Node();
                 node.setState(currState);
-                Move[] moves = program.GetMoves(node);
-                foreach (var move in moves)
+                var desiredMoveState = (1-currState[4][1], 1-currState[3][2], 1-currState[2][3]);
+                program.move(node.getState(), desiredMove.GetItem(1), desiredMove.GetItem(2));
+                currState = node.getState();
+                
+                if ((currState[4][1], currState[3][2], currState[2][3]) == desiredMoveState)
                 {
-                        if (move.Equals(desiredMove))
-                        {
-                                return true;
-                        }
+                        return true;
                 }
                 return false;
         }
@@ -88,7 +92,26 @@ public class ProgramStart
                 int[][] currState = program.stateMap;
                 Node node = new Node();
                 node.setState(currState);
-                return false;
+                //either get moves or get childern modifies the base state.
+                Move[] moves = program.GetMoves(node);
+                Node[] childern = program.getChildern(node);
+                //doesn't get a valid move.
+                var topMove = moves[0].GetRep();
+
+                foreach (Node child in childern)
+                {
+                        int[][]newState = child.getState();
+                        (int, int, int) moveResult =
+                        (newState[topMove.Item1.Item1][topMove.Item1.Item2],
+                        newState[topMove.Item2.Item1][topMove.Item2.Item2],
+                        newState[topMove.Item3.Item1][topMove.Item3.Item2]);
+                        Console.WriteLine(moveResult);
+                        if (moveResult == (0, 0, 1))
+                        {
+                                return true;
+                        }
+                }
+        return false;
         }
 
         static bool TestBfs(Program program)
@@ -98,6 +121,10 @@ public class ProgramStart
                 // {
                 //         Console.WriteLine(i);
                 //  }
+                foreach (var move in program.movePath)
+                {
+                        Console.WriteLine(move.GetRep());
+                 }
                 return program.path.Count >= 9 ? true : false;
         }
         
