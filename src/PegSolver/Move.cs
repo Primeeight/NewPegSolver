@@ -1,34 +1,40 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.VisualBasic;
 
-public class Move(((int, int), (int, int), (int, int)) representation)
+public class Move(((int, int), (int, int), (int, int)) value)
 {
-    ((int, int), (int, int), (int, int)) rep = representation;
 
     public (int, int) GetItem(int i)
     {
         switch (i)
         {
-            case 1: return (rep.Item1);
-            case 2: return (rep.Item2);
-            case 3: return (rep.Item3);
+            case 1: return (value.Item1);
+            case 2: return (value.Item2);
+            case 3: return (value.Item3);
             default: return (-1, -1);
         }
     }
     public ((int, int), (int, int), (int, int)) GetRep()
     {
-        return representation;
+        return value;
     }
     public void setRep(((int, int), (int, int), (int, int)) newRep)
     {
-        rep = newRep;
+        value = newRep;
     }
     public override bool Equals(object other)
     {
-        if (other == null)
-        return false;
+        if (other as Move == null)
+            return false;
         
-        Move otherMove = other as Move;
-        return rep.Item1 == otherMove.GetItem(1) && rep.Item2 == otherMove.GetItem(2) && rep.Item3 == otherMove.GetItem(3);
+        Move otherMove = (Move)other;
+        if (otherMove == null)
+        return false;
+        return value.Item1 == otherMove.GetItem(1) && value.Item2 == otherMove.GetItem(2) && value.Item3 == otherMove.GetItem(3);
+    }
+
+    public override int GetHashCode()
+    {
+        throw new NotImplementedException();
     }
 }
